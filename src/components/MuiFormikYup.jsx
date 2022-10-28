@@ -1,4 +1,6 @@
-import { Box, Button, Card, Grid } from '@mui/material'
+import React, { useState, useEffect } from 'react'
+
+import { Box, Button, Card, Container, Grid } from '@mui/material'
 import Autocomplete from '@mui/material/Autocomplete'
 import TextField from '@mui/material/TextField'
 import countryList from '../data/countryList'
@@ -34,103 +36,100 @@ export default function MuiFormikYup() {
   }
 
   return (
-    <Box py={4}>
+    <Container>
       <h3 mb={2}>Account Setting</h3>
 
-      <Card
-        sx={{
-          p: 4,
-        }}
-      >
-        <Formik
-          initialValues={initialValues}
-          validationSchema={accountSchema}
-          onSubmit={handleFormSubmit}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            setFieldValue,
-          }) => (
-            <form onSubmit={handleSubmit}>
-              <Box mb={4}>
-                <Grid container spacing={3}>
-                  <Grid item xs={12} sm={6}>
-                    <SelectField
-                      fullWidth
-                      name="country"
-                      label="country"
-                      //onBlur={handleBlur}
-                      //onChange={handleChange}
-                      value={values.country}
-                      data={countryList}
-                      /* error={!!touched.country && !!errors.country}
+      <React.Fragment>
+        <Box sx={{ width: '100%' }}>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={accountSchema}
+            onSubmit={handleFormSubmit}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              setFieldValue,
+            }) => (
+              <form onSubmit={handleSubmit}>
+                <Box mb={4}>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12} sm={6}>
+                      <SelectField
+                        fullWidth
+                        name="country"
+                        label="country"
+                        //onBlur={handleBlur}
+                        //onChange={handleChange}
+                        value={values.country}
+                        data={countryList}
+                        /* error={!!touched.country && !!errors.country}
                       helperText={touched.country && errors.country} */
-                    />
-                  </Grid>
-                  <Grid item md={6} xs={12}>
-                    <TextField
-                      fullWidth
-                      color="info"
-                      size="medium"
-                      name="first_name"
-                      label="First Name"
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.first_name}
-                      error={!!touched.first_name && !!errors.first_name}
-                      helperText={touched.first_name && errors.first_name}
-                    />
-                  </Grid>
-                  <Grid item md={6} xs={12}>
-                    <TextField
-                      fullWidth
-                      color="info"
-                      size="medium"
-                      name="last_name"
-                      label="Last Name"
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.last_name}
-                      error={!!touched.last_name && !!errors.last_name}
-                      helperText={touched.last_name && errors.last_name}
-                    />
-                  </Grid>
-                  <Grid item md={6} xs={12}>
-                    <TextField
-                      fullWidth
-                      color="info"
-                      name="email"
-                      type="email"
-                      label="Email"
-                      size="medium"
-                      onBlur={handleBlur}
-                      value={values.email}
-                      onChange={handleChange}
-                      error={!!touched.email && !!errors.email}
-                      helperText={touched.email && errors.email}
-                    />
-                  </Grid>
-                  <Grid item md={6} xs={12}>
-                    <TextField
-                      fullWidth
-                      type="tel"
-                      color="info"
-                      size="medium"
-                      name="contact"
-                      label="Phone"
-                      onBlur={handleBlur}
-                      value={values.contact}
-                      onChange={handleChange}
-                      error={!!touched.contact && !!errors.contact}
-                      helperText={touched.contact && errors.contact}
-                    />
-                  </Grid>
-                  {/* <Grid item md={6} xs={12}>
+                      />
+                    </Grid>
+                    <Grid item md={6} xs={12}>
+                      <TextField
+                        fullWidth
+                        color="info"
+                        size="medium"
+                        name="first_name"
+                        label="First Name"
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.first_name}
+                        error={!!touched.first_name && !!errors.first_name}
+                        helperText={touched.first_name && errors.first_name}
+                      />
+                    </Grid>
+                    <Grid item md={6} xs={12}>
+                      <TextField
+                        fullWidth
+                        color="info"
+                        size="medium"
+                        name="last_name"
+                        label="Last Name"
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.last_name}
+                        error={!!touched.last_name && !!errors.last_name}
+                        helperText={touched.last_name && errors.last_name}
+                      />
+                    </Grid>
+                    <Grid item md={6} xs={12}>
+                      <TextField
+                        fullWidth
+                        color="info"
+                        name="email"
+                        type="email"
+                        label="Email"
+                        size="medium"
+                        onBlur={handleBlur}
+                        value={values.email}
+                        onChange={handleChange}
+                        error={!!touched.email && !!errors.email}
+                        helperText={touched.email && errors.email}
+                      />
+                    </Grid>
+                    <Grid item md={6} xs={12}>
+                      <TextField
+                        fullWidth
+                        type="tel"
+                        color="info"
+                        size="medium"
+                        name="contact"
+                        label="Phone"
+                        onBlur={handleBlur}
+                        value={values.contact}
+                        onChange={handleChange}
+                        error={!!touched.contact && !!errors.contact}
+                        helperText={touched.contact && errors.contact}
+                      />
+                    </Grid>
+                    {/* <Grid item md={6} xs={12}>
                     <Autocomplete
                       fullWidth
                       disablePortal
@@ -152,30 +151,31 @@ export default function MuiFormikYup() {
                       )}
                     />
                   </Grid> */}
-                  <Grid item md={6} xs={12}>
-                    <TextField
-                      fullWidth
-                      name="city"
-                      label="City"
-                      color="info"
-                      size="medium"
-                      onBlur={handleBlur}
-                      value={values.city}
-                      onChange={handleChange}
-                      error={!!touched.city && !!errors.city}
-                      helperText={touched.city && errors.city}
-                    />
+                    <Grid item md={6} xs={12}>
+                      <TextField
+                        fullWidth
+                        name="city"
+                        label="City"
+                        color="info"
+                        size="medium"
+                        onBlur={handleBlur}
+                        value={values.city}
+                        onChange={handleChange}
+                        error={!!touched.city && !!errors.city}
+                        helperText={touched.city && errors.city}
+                      />
+                    </Grid>
                   </Grid>
-                </Grid>
-              </Box>
+                </Box>
 
-              <Button type="submit" variant="contained" color="info">
-                Save Changes
-              </Button>
-            </form>
-          )}
-        </Formik>
-      </Card>
-    </Box>
+                <Button type="submit" variant="contained" color="info">
+                  Save Changes
+                </Button>
+              </form>
+            )}
+          </Formik>
+        </Box>
+      </React.Fragment>
+    </Container>
   )
 }
