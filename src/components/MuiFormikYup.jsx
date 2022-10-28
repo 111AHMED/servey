@@ -1,35 +1,37 @@
-import { Box, Button, Card, Grid } from "@mui/material";
-import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
-import countryList from "../data/countryList";
-import { Formik } from "formik";
+import { Box, Button, Card, Grid } from '@mui/material'
+import Autocomplete from '@mui/material/Autocomplete'
+import TextField from '@mui/material/TextField'
+import countryList from '../data/countryList'
+import { Formik } from 'formik'
+import SelectField from './SelectField'
 
-import * as yup from "yup"; // upload button
+import * as yup from 'yup' // upload button
 
 const accountSchema = yup.object().shape({
-  city: yup.string().required("City is required"),
-  country: yup.mixed().required("Country is required"),
-  contact: yup.string().required("Contact is required"),
-  last_name: yup.string().required("Last name is required"),
-  first_name: yup.string().required("First name is required"),
-  email: yup.string().email("Invalid Email").required("Email is required"),
-}); // =============================================================================
+  city: yup.string().required('City is required'),
+  country: yup.mixed().required('Country is required'),
+  contact: yup.string().required('Contact is required'),
+  last_name: yup.string().required('Last name is required'),
+  first_name: yup.string().required('First name is required'),
+  email: yup.string().email('Invalid Email').required('Email is required'),
+}) // =============================================================================
 
 // =============================================================================
 
 export default function MuiFormikYup() {
   const initialValues = {
-    city: "",
-    email: "",
-    contact: "",
-    country: null,
-    last_name: "",
-    first_name: "",
-  };
+    city: '',
+    email: '',
+    contact: '',
+    country: 'Afghanistan',
+    last_name: '',
+    first_name: '',
+  }
 
   const handleFormSubmit = async (values) => {
-    console.log(values);
-  };
+    console.log(values)
+    alert(JSON.stringify(values, null, 2))
+  }
 
   return (
     <Box py={4}>
@@ -57,6 +59,19 @@ export default function MuiFormikYup() {
             <form onSubmit={handleSubmit}>
               <Box mb={4}>
                 <Grid container spacing={3}>
+                  <Grid item xs={12} sm={6}>
+                    <SelectField
+                      fullWidth
+                      name="country"
+                      label="country"
+                      //onBlur={handleBlur}
+                      //onChange={handleChange}
+                      value={values.country}
+                      data={countryList}
+                      /* error={!!touched.country && !!errors.country}
+                      helperText={touched.country && errors.country} */
+                    />
+                  </Grid>
                   <Grid item md={6} xs={12}>
                     <TextField
                       fullWidth
@@ -115,14 +130,14 @@ export default function MuiFormikYup() {
                       helperText={touched.contact && errors.contact}
                     />
                   </Grid>
-                  <Grid item md={6} xs={12}>
+                  {/* <Grid item md={6} xs={12}>
                     <Autocomplete
                       fullWidth
                       disablePortal
                       options={countryList}
                       value={values.country}
                       getOptionLabel={(option) => option.label}
-                      onChange={(_, value) => setFieldValue("country", value)}
+                      onChange={(_, value) => setFieldValue('country', value)}
                       renderInput={(params) => (
                         <TextField
                           color="info"
@@ -136,7 +151,7 @@ export default function MuiFormikYup() {
                         />
                       )}
                     />
-                  </Grid>
+                  </Grid> */}
                   <Grid item md={6} xs={12}>
                     <TextField
                       fullWidth
@@ -162,5 +177,5 @@ export default function MuiFormikYup() {
         </Formik>
       </Card>
     </Box>
-  );
+  )
 }

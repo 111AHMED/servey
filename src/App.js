@@ -6,9 +6,9 @@ import SurveyCreatorComponent from "./components/SurveyCreatorComponent";
 function App() {
   return (
     <div>
-      <SurveyCreatorComponent />
-      <SurveyComponent />
-      <SurveyMultipage />
+      {/* <SurveyCreatorComponent /> */}
+      {/* <SurveyComponent /> */}
+      {/* <SurveyMultipage /> */}
       <MuiFormikYup />
     </div>
   );
